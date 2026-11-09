@@ -9,6 +9,7 @@
   body {
     @apply bg-cream-50 text-ink-900 font-body antialiased;
     text-rendering: optimizeLegibility;
+    transition: background-color 250ms ease, color 250ms ease;
   }
   h1, h2, h3, h4 {
     @apply font-display;
@@ -31,6 +32,44 @@
   .section-title {
     @apply font-display text-3xl sm:text-4xl lg:text-5xl font-semibold leading-[1.1] text-ink-900;
   }
+}
+
+html[data-theme="dark"] body {
+  background-color: #0b1f1a;
+  color: #f8f3e9;
+}
+
+html[data-theme="dark"] .bg-cream-50,
+html[data-theme="dark"] .bg-cream-50\/90,
+html[data-theme="dark"] .bg-cream-100,
+html[data-theme="dark"] .bg-white {
+  background-color: #173a30 !important;
+}
+
+html[data-theme="dark"] .text-ink-900,
+html[data-theme="dark"] .text-ink-800 {
+  color: #f8f3e9 !important;
+}
+
+html[data-theme="dark"] .text-ink-700\/85,
+html[data-theme="dark"] .text-ink-700\/80,
+html[data-theme="dark"] .text-ink-700\/70,
+html[data-theme="dark"] .text-ink-700\/60 {
+  color: rgba(248, 243, 233, 0.72) !important;
+}
+
+html[data-theme="dark"] .border-ink-900\/5,
+html[data-theme="dark"] .border-ink-900\/10,
+html[data-theme="dark"] .border-ink-900\/15 {
+  border-color: rgba(248, 243, 233, 0.14) !important;
+}
+
+html[data-theme="dark"] .theme-panel {
+  background-color: #0f2a22 !important;
+}
+
+html[data-theme="dark"] .section-title {
+  color: #f8f3e9;
 }
 
 @media (prefers-reduced-motion: reduce) {

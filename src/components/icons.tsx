@@ -24,6 +24,8 @@ const make = (path: React.ReactNode) =>
 
 export const Menu = make(<><path d="M4 6h16M4 12h16M4 18h16" /></>);
 export const X = make(<><path d="M18 6 6 18M6 6l12 12" /></>);
+export const Moon = make(<><path d="M20.5 15.5A8.5 8.5 0 0 1 8.5 3.5 8.5 8.5 0 1 0 20.5 15.5Z" /></>);
+export const Sun = make(<><circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" /></>);
 export const ChevronLeft = make(<><path d="m15 18-6-6 6-6" /></>);
 export const ChevronRight = make(<><path d="m9 18 6-6-6-6" /></>);
 export const ArrowRight = make(<><path d="M5 12h14M13 6l6 6-6 6" /></>);

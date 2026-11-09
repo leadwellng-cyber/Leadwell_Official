@@ -15,6 +15,13 @@ export const navLinks = [
   { label: "Events", href: "/events" },
 ] as const;
 
+export const socialLinks = [
+  { label: "Facebook", href: "https://www.facebook.com/LeadwellIntl/" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/leadwell-international-8767353b/" },
+  { label: "WhatsApp", href: "https://chat.whatsapp.com/Jronk5mz2KsFFgB5ZBj18B" },
+  { label: "Telegram", href: "https://t.me/+5MPMXPdyj505ZDk0" },
+] as const;
+
 export const projects = [
   {
     slug: "readers-hub",

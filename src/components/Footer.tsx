@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import Logo from "./Logo";
-import { navLinks, organization, projects } from "../data/site";
+import { navLinks, organization, projects, socialLinks } from "../data/site";
 
 export default function Footer() {
-  const year = new Date().getFullYear();
+  const year = 2027;
 
   return (
     <footer className="bg-ink-950 text-cream-100/70">
@@ -52,11 +52,24 @@ export default function Footer() {
               Connect
             </h3>
             <p className="mt-4 text-sm text-cream-100/60">
-              Approved social media links and contact information will be listed here once available.
+              Follow Leadwell International for updates, opportunities and community stories.
             </p>
+            <div className="mt-5 flex flex-wrap gap-2">
+              {socialLinks.map((social) => (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="rounded-full border border-cream-50/20 px-3 py-2 text-xs font-medium text-cream-50 transition-colors hover:border-gold-300 hover:text-gold-300"
+                >
+                  {social.label}
+                </a>
+              ))}
+            </div>
             <Link
               to="/get-involved"
-              className="mt-4 inline-flex items-center rounded-full border border-cream-50/20 px-5 py-2.5 text-sm font-medium text-cream-50 transition-colors hover:bg-cream-50 hover:text-ink-900"
+              className="mt-5 inline-flex items-center rounded-full border border-cream-50/20 px-5 py-2.5 text-sm font-medium text-cream-50 transition-colors hover:bg-cream-50 hover:text-ink-900"
             >
               Contact Leadwell
             </Link>

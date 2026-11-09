@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "motion/react";
 import { Menu, X } from "./icons";
+import ThemeToggle from "./ThemeToggle";
 import Logo from "./Logo";
 import { ButtonLink } from "./Button";
 import { navLinks, organization } from "../data/site";
@@ -66,13 +67,16 @@ export default function Header() {
           })}
         </nav>
 
-        <div className="hidden lg:block">
+        <div className="hidden items-center gap-3 lg:flex">
+          <ThemeToggle />
           <ButtonLink to="/get-involved" size="md">
             Get Involved
           </ButtonLink>
         </div>
 
-        <button
+        <div className="flex items-center gap-2 lg:hidden">
+          <ThemeToggle />
+          <button
           type="button"
           className={`lg:hidden inline-flex items-center justify-center rounded-full p-2 transition-colors ${
             solid ? "text-ink-900 hover:bg-ink-900/5" : "text-cream-50 hover:bg-white/10"
@@ -81,8 +85,9 @@ export default function Header() {
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
         >
-          {open ? <X size={24} /> : <Menu size={24} />}
-        </button>
+            {open ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </div>
 
       <AnimatePresence>
@@ -92,7 +97,7 @@ export default function Header() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="overflow-hidden lg:hidden border-t border-ink-900/5 bg-cream-50"
+            className="theme-panel overflow-hidden border-t border-ink-900/5 bg-cream-50 lg:hidden"
           >
             <nav className="container-lead flex flex-col py-4" aria-label="Mobile">
               {navLinks.map((link) => (
