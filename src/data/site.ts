@@ -1,3 +1,46 @@
+export type Ministry = {
+  slug: string;
+  name: string;
+  director: string;
+  summary: string;
+  mandate: string;
+  image: string;
+  subMinistries: string[];
+  responsibilities?: string[];
+};
+
+export type Activity = {
+  id: string;
+  title: string;
+  date: string;
+  ministrySlug: string;
+  description: string;
+  href?: string;
+};
+
+export type Publication = {
+  slug: string;
+  title: string;
+  kind: "News" | "Publication";
+  date: string;
+  category: string;
+  ministrySlug?: string;
+  excerpt: string;
+  image?: string;
+  downloadableFile?: string;
+};
+
+export type Event = {
+  slug: string;
+  title: string;
+  date: string;
+  time?: string;
+  venue?: string;
+  description: string;
+  ministrySlug: string;
+  flyer?: string;
+};
+
 export const organization = {
   name: "Leadwell International",
   shortName: "Leadwell",
@@ -9,8 +52,8 @@ export const organization = {
 
 export const navLinks = [
   { label: "About Leadwell", href: "/about" },
-  { label: "Our Projects", href: "/projects" },
-  { label: "News & Updates", href: "/news" },
+  { label: "Our Ministries", href: "/ministries" },
+  { label: "News & Publications", href: "/news" },
   { label: "Calendar", href: "/calendar" },
   { label: "Events", href: "/events" },
 ] as const;
@@ -22,100 +65,138 @@ export const socialLinks = [
   { label: "Telegram", href: "https://t.me/+5MPMXPdyj505ZDk0" },
 ] as const;
 
-export const projects = [
+const images = {
+  books: "https://images.pexels.com/photos/159866/books-book-pages-read-literature-159866.jpeg?auto=compress&cs=tinysrgb&w=1200",
+  relationships: "https://images.pexels.com/photos/7669205/pexels-photo-7669205.jpeg?auto=compress&cs=tinysrgb&w=1200",
+  service: "https://images.pexels.com/photos/6646926/pexels-photo-6646926.jpeg?auto=compress&cs=tinysrgb&w=1200",
+  worship: "https://images.pexels.com/photos/10024790/pexels-photo-10024790.jpeg?auto=compress&cs=tinysrgb&w=1200",
+  leadership: "https://images.pexels.com/photos/9034719/pexels-photo-9034719.jpeg?auto=compress&cs=tinysrgb&w=1200",
+  school: "https://images.pexels.com/photos/12448839/pexels-photo-12448839.jpeg?auto=compress&cs=tinysrgb&w=1200",
+  community: "https://images.pexels.com/photos/7156163/pexels-photo-7156163.jpeg?auto=compress&cs=tinysrgb&w=1200",
+};
+
+export const ministries: Ministry[] = [
   {
-    slug: "readers-hub",
-    name: "Readers' Hub",
-    tagline: "A culture of reading",
-    description:
-      "Promotes a reading culture through recommended books, reading activities and readers' conferences.",
-    image:
-      "https://images.pexels.com/photos/159866/books-book-pages-read-literature-159866.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    slug: "christian-faith-ministry",
+    name: "Christian Faith & Ministry",
+    director: "Ibinabo Prince Tubotamuno",
+    summary: "Nurturing Christian faith, spiritual formation and a culture of learning.",
+    mandate: "To strengthen Leadwell's Christian identity through faith, biblical learning, leadership formation and fellowship.",
+    image: images.books,
+    subMinistries: ["Bible Reading", "Leadership Development Service (LDS)", "Book Review", "Readers' Hub"],
   },
   {
-    slug: "loveright",
-    name: "LoveRight",
-    tagline: "Healthy relationships",
-    description:
-      "A relationship development initiative supporting healthy relationships among singles and married people.",
-    image:
-      "https://images.pexels.com/photos/7669205/pexels-photo-7669205.jpeg?auto=compress&cs=tinysrgb&w=1200",
-  },
-  {
-    slug: "leadcare",
-    name: "Leadcare",
-    tagline: "Humanitarian service",
-    description:
-      "Humanitarian activities, skills acquisition, career-choice training and community service.",
-    image:
-      "https://images.pexels.com/photos/6646926/pexels-photo-6646926.jpeg?auto=compress&cs=tinysrgb&w=1200",
-  },
-  {
-    slug: "ignite",
-    name: "Ignite",
-    tagline: "Skills & worship",
-    description:
-      "Skills expression, transformation and an annual Easter worship gathering.",
-    image:
-      "https://images.pexels.com/photos/10024790/pexels-photo-10024790.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    slug: "mission-outreach",
+    name: "Mission & Outreach",
+    director: "Benneth Tamunobarabi",
+    summary: "Extending Leadwell's values through relationships, schools and community outreach.",
+    mandate: "To serve people and communities through practical outreach, healthy relationships, skills expression and school-focused initiatives.",
+    image: images.school,
+    subMinistries: ["LoveRight", "Ignite", "School Affairs"],
+    responsibilities: ["School Leaders' Summit", "Schools' Tour"],
   },
   {
     slug: "leadmill",
     name: "Leadmill",
-    tagline: "Leadership development",
-    description:
-      "Leadership development through Leadership Development Service (LDS) and Pioneers' Boot Camp.",
-    image:
-      "https://images.pexels.com/photos/9034719/pexels-photo-9034719.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    director: "Franknly Solomon",
+    summary: "Creating spaces for leadership development, learning and fellowship.",
+    mandate: "To develop purposeful leaders through structured learning experiences, community and meaningful connection.",
+    image: images.leadership,
+    subMinistries: ["Leadwell Academy", "Hangouts"],
   },
   {
-    slug: "school-affairs",
-    name: "School Affairs",
-    tagline: "School-focused outreach",
-    description:
-      "School-focused outreach including the School Leaders' Summit and Schools' Tour.",
-    image:
-      "https://images.pexels.com/photos/12448839/pexels-photo-12448839.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    slug: "leadtech",
+    name: "LeadTech",
+    director: "Miebaka Atorudibo",
+    summary: "Using technology to advance Leadwell's visibility and organizational development.",
+    mandate: "To use technology to advance Leadwell International's visibility and organizational development.",
+    image: images.community,
+    responsibilities: ["Official website", "Digital platforms", "Technology infrastructure", "Digital visibility", "Technology-enabled organizational development"],
+    subMinistries: [],
   },
-] as const;
+  {
+    slug: "leadpress",
+    name: "LeadPress",
+    director: "Samuel Abayomi",
+    summary: "Managing Leadwell's publications, editorial work, media production and communications.",
+    mandate: "To steward Leadwell's written, editorial and media communications with clarity and consistency.",
+    image: images.books,
+    responsibilities: ["Weekly NLC materials", "Weekly OLC materials", "The Visioner's books", "Organizational publications and productions", "Editorial content and communications"],
+    subMinistries: [],
+  },
+  {
+    slug: "leadcare",
+    name: "LeadCare",
+    director: "Stella Biebele",
+    summary: "Serving people through care, inclusion, skills and community-focused action.",
+    mandate: "To express Leadwell's values through humanitarian service and practical care for people and communities.",
+    image: images.service,
+    subMinistries: ["Boy Child Day", "Girl Child Day", "Ghetto"],
+  },
+  {
+    slug: "finance-partnership",
+    name: "Finance & Partnership",
+    director: "Miracle Ezekiel",
+    summary: "Supporting accountable financial management and meaningful partnerships.",
+    mandate: "To provide responsible financial management, partnership coordination, accountability and general organizational support.",
+    image: images.relationships,
+    responsibilities: ["Financial management", "Financial remittance coordination", "Partnership commitments", "General organizational support", "Financial accountability"],
+    subMinistries: [],
+  },
+  {
+    slug: "admin",
+    name: "Admin",
+    director: "Biebele Samuel",
+    summary: "Providing professional administrative coordination for Leadwell's work.",
+    mandate: "To support the President and Leadwell's organizational coordination through professional administration and documentation.",
+    image: images.leadership,
+    responsibilities: ["Administrative support for external functions", "External training invitations", "Meeting secretarial support", "Camp documentation", "Administrative coordination"],
+    subMinistries: [],
+  },
+];
+
+export const activities: Activity[] = [];
+export const events: Event[] = [];
+export const publications: Publication[] = [];
 
 export const heroSlides = [
   {
-    image:
-      "https://images.pexels.com/photos/34328505/pexels-photo-34328505.jpeg?auto=compress&cs=tinysrgb&w=1920",
+    image: "https://images.pexels.com/photos/34328505/pexels-photo-34328505.jpeg?auto=compress&cs=tinysrgb&w=1920",
     eyebrow: "Welcome to Leadwell International",
     title: "Transforming followers into empowered leaders",
-    description:
-      "A Christian faith-based leadership development organization raising a generation of purposeful leaders.",
+    description: "A Christian faith-based leadership development organization raising a generation of purposeful leaders.",
   },
   {
-    image:
-      "https://images.pexels.com/photos/33176041/pexels-photo-33176041.jpeg?auto=compress&cs=tinysrgb&w=1920",
-    eyebrow: "Leadership Development",
-    title: "Growing leaders through learning and service",
-    description:
-      "We equip individuals to lead with integrity, vision and compassion in every sphere of life.",
+    image: "https://images.pexels.com/photos/33176041/pexels-photo-33176041.jpeg?auto=compress&cs=tinysrgb&w=1920",
+    eyebrow: "Eight Independent Ministries",
+    title: "One shared mission, eight distinct expressions",
+    description: "Our ministries serve directly under the President, each bringing a focused mandate to Leadwell's shared vision.",
   },
   {
-    image:
-      "https://images.pexels.com/photos/6647015/pexels-photo-6647015.jpeg?auto=compress&cs=tinysrgb&w=1920",
-    eyebrow: "Community Impact",
-    title: "Six initiatives, one shared mission",
-    description:
-      "From reading culture to humanitarian service, our projects meet real needs in real communities.",
+    image: "https://images.pexels.com/photos/6647015/pexels-photo-6647015.jpeg?auto=compress&cs=tinysrgb&w=1920",
+    eyebrow: "Faith, Service & Learning",
+    title: "Building leaders for lasting impact",
+    description: "We equip individuals to lead with integrity, vision and compassion in every sphere of life.",
   },
   {
-    image:
-      "https://images.pexels.com/photos/1198171/pexels-photo-1198171.jpeg?auto=compress&cs=tinysrgb&w=1920",
-    eyebrow: "Faith & Fellowship",
+    image: "https://images.pexels.com/photos/1198171/pexels-photo-1198171.jpeg?auto=compress&cs=tinysrgb&w=1920",
+    eyebrow: "Community & Fellowship",
     title: "Leading with faith, serving together",
-    description:
-      "Anchored in Christian values, we build fellowship that strengthens leaders for lasting impact.",
+    description: "Anchored in Christian values, we build fellowship that strengthens leaders for lasting impact.",
   },
 ] as const;
 
-export const aboutImage =
-  "https://images.pexels.com/photos/6949925/pexels-photo-6949925.jpeg?auto=compress&cs=tinysrgb&w=1200";
+export const aboutImage = "https://images.pexels.com/photos/6949925/pexels-photo-6949925.jpeg?auto=compress&cs=tinysrgb&w=1200";
+export const getInvolvedImage = images.community;
 
-export const getInvolvedImage =
-  "https://images.pexels.com/photos/7156163/pexels-photo-7156163.jpeg?auto=compress&cs=tinysrgb&w=1600";
+export function getMinistry(slug: string | undefined): Ministry | undefined {
+  return ministries.find((ministry) => ministry.slug === slug);
+}
+
+export function getPublication(slug: string | undefined): Publication | undefined {
+  return publications.find((publication) => publication.slug === slug);
+}
+
+export function getEvent(slug: string | undefined): Event | undefined {
+  return events.find((event) => event.slug === slug);
+}

@@ -1,156 +1,42 @@
 import { useEffect } from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
+import type { ReactNode } from "react";
+import { Route, Routes, useLocation } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
-import Placeholder from "./components/Placeholder";
+import About from "./pages/About";
+import Ministries from "./pages/Ministries";
+import MinistryDetail from "./pages/MinistryDetail";
+import News from "./pages/News";
+import NewsDetail from "./pages/NewsDetail";
+import Events from "./pages/Events";
+import EventDetail from "./pages/EventDetail";
+import Calendar from "./pages/Calendar";
+import GetInvolved from "./pages/GetInvolved";
+import EmptyState from "./components/EmptyState";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
+  useEffect(() => window.scrollTo(0, 0), [pathname]);
   return null;
 }
 
+function SiteLayout({ children }: { children: ReactNode }) {
+  return <><Header /><main id="main">{children}</main><Footer /></>;
+}
+
 export default function App() {
-  return (
-    <>
-      <ScrollToTop />
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <>
-              <Header />
-              <main id="main">
-                <Home />
-              </main>
-              <Footer />
-            </>
-          }
-        />
-        <Route
-          path="/about"
-          element={
-            <>
-              <Header />
-              <main id="main">
-                <Placeholder
-                  eyebrow="About Leadwell"
-                  title="About Leadwell"
-                  description="Learn about our founding, vision, values and the people behind Leadwell International."
-                />
-              </main>
-              <Footer />
-            </>
-          }
-        />
-        <Route
-          path="/projects"
-          element={
-            <>
-              <Header />
-              <main id="main">
-                <Placeholder
-                  eyebrow="Our Projects"
-                  title="Our Projects"
-                  description="Explore all six Leadwell initiatives and their sub-projects in one place."
-                />
-              </main>
-              <Footer />
-            </>
-          }
-        />
-        <Route
-          path="/projects/:slug"
-          element={
-            <>
-              <Header />
-              <main id="main">
-                <Placeholder />
-              </main>
-              <Footer />
-            </>
-          }
-        />
-        <Route
-          path="/news"
-          element={
-            <>
-              <Header />
-              <main id="main">
-                <Placeholder
-                  eyebrow="News & Updates"
-                  title="News & Updates"
-                  description="Organizational announcements, stories and project updates from across Leadwell."
-                />
-              </main>
-              <Footer />
-            </>
-          }
-        />
-        <Route
-          path="/calendar"
-          element={
-            <>
-              <Header />
-              <main id="main">
-                <Placeholder
-                  eyebrow="Calendar"
-                  title="Leadwell Calendar"
-                  description="The unified calendar aggregating activities from all six projects and their sub-projects."
-                />
-              </main>
-              <Footer />
-            </>
-          }
-        />
-        <Route
-          path="/events"
-          element={
-            <>
-              <Header />
-              <main id="main">
-                <Placeholder
-                  eyebrow="Events"
-                  title="Events"
-                  description="Browse upcoming and past Leadwell events with full details."
-                />
-              </main>
-              <Footer />
-            </>
-          }
-        />
-        <Route
-          path="/get-involved"
-          element={
-            <>
-              <Header />
-              <main id="main">
-                <Placeholder
-                  eyebrow="Get Involved & Contact"
-                  title="Get Involved & Contact"
-                  description="Discover how to participate, volunteer, partner or make an enquiry with Leadwell International."
-                />
-              </main>
-              <Footer />
-            </>
-          }
-        />
-        <Route
-          path="*"
-          element={
-            <>
-              <Header />
-              <main id="main">
-                <Placeholder title="Page not found" description="The page you're looking for doesn't exist yet." />
-              </main>
-              <Footer />
-            </>
-          }
-        />
-      </Routes>
-    </>
-  );
+  return <><ScrollToTop /><Routes>
+    <Route path="/" element={<SiteLayout><Home /></SiteLayout>} />
+    <Route path="/about" element={<SiteLayout><About /></SiteLayout>} />
+    <Route path="/ministries" element={<SiteLayout><Ministries /></SiteLayout>} />
+    <Route path="/ministries/:slug" element={<SiteLayout><MinistryDetail /></SiteLayout>} />
+    <Route path="/news" element={<SiteLayout><News /></SiteLayout>} />
+    <Route path="/news/:slug" element={<SiteLayout><NewsDetail /></SiteLayout>} />
+    <Route path="/events" element={<SiteLayout><Events /></SiteLayout>} />
+    <Route path="/events/:slug" element={<SiteLayout><EventDetail /></SiteLayout>} />
+    <Route path="/calendar" element={<SiteLayout><Calendar /></SiteLayout>} />
+    <Route path="/get-involved" element={<SiteLayout><GetInvolved /></SiteLayout>} />
+    <Route path="*" element={<SiteLayout><EmptyState title="Page not found" description="The page you're looking for does not exist." /></SiteLayout>} />
+  </Routes></>;
 }

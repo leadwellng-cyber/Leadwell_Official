@@ -1,7 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 import { ButtonLink } from "./Button";
 import { ArrowRight } from "./icons";
-import { projects, organization } from "../data/site";
+import { getMinistry, organization } from "../data/site";
 import Logo from "./Logo";
 
 type PlaceholderProps = {
@@ -12,11 +12,11 @@ type PlaceholderProps = {
 
 export default function Placeholder({ title, eyebrow, description }: PlaceholderProps) {
   const { slug } = useParams();
-  const project = slug ? projects.find((p) => p.slug === slug) : undefined;
+  const ministry = slug ? getMinistry(slug) : undefined;
 
-  const heading = project ? project.name : title;
-  const sub = project ? project.description : description;
-  const eye = project ? "Our Projects" : eyebrow;
+  const heading = ministry ? ministry.name : title;
+  const sub = ministry ? ministry.summary : description;
+  const eye = ministry ? "Our Ministries" : eyebrow;
 
   return (
     <div className="flex min-h-[100svh] flex-col">
@@ -42,9 +42,9 @@ export default function Placeholder({ title, eyebrow, description }: Placeholder
           <ButtonLink to="/" variant="secondary">
             Back to home
           </ButtonLink>
-          {project && (
-            <ButtonLink to="/projects" variant="ghost">
-              All projects
+          {ministry && (
+            <ButtonLink to="/ministries" variant="ghost">
+              All ministries
               <ArrowRight size={16} />
             </ButtonLink>
           )}
